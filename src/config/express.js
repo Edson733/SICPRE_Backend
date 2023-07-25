@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const {userRouter} = require('../modules/controller/router');
 require('dotenv').config(); //Importaciones
 
 const app = express(); //Instanciar server
@@ -15,7 +16,7 @@ app.get("/", (request, response) => {
 });
 
 //Endpoints
-
+app.use('/api/users', userRouter);
 
 module.exports = {
     app
