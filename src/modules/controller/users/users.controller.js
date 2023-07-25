@@ -1,7 +1,6 @@
 const {Response, Router} = require('express');
 const {findAll, findById, findEnable, save, saveUs, update, enable, disable, emailExist} = require('./users.gateway');
 const {validateError} = require('../../../utils/functions');
-const {generateToken, decodeToken} = require('../../../config/jwt');
 
 const getAll = async(req, res = Response) => {
     try {
@@ -39,6 +38,11 @@ const getById = async(req, res = Response) => {
 
 const insert = async(req, res = Response) => {
     try {
+        const emailExis = await emailExist(req.body.email);
+        console.log(emailExis);
+        if( /^[a-zA-Z ]+$/.test(req.body.name) == false) throw Error('Invalid name');
+        if(/^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i.test(req.body.email) == false) throw Error('Invalid email');
+        if(emailExis[0] != null) throw Error('Email already in use');
         const {name_usr, lastname_usr, rol_usr, email_usr, password_usr, fechaCreacion_usr} = req.body;
         const results = await save({name_usr, lastname_usr, rol_usr, email_usr, password_usr, fechaCreacion_usr});
         res.status(200).json({results});
@@ -68,7 +72,9 @@ const register = async(req, res = Response) => {
 
 const modific = async(req, res = Response) => {
     try {
-        
+        const {name_usr, lastname_usr, rol_usr, email_usr, password_usr, fechaCreacion_usr, usuarioId_usr} = req.body;
+        const results = await update({name_usr, lastname_usr, rol_usr, email_usr, password_usr, fechaCreacion_usr, usuarioId_usr});
+        res.status(200).json({results});
     } catch (error) {
         console.log(error);
         const message = validateError(error);
@@ -78,7 +84,9 @@ const modific = async(req, res = Response) => {
 
 const disa = async(req, res = Response) => {
     try {
-        
+        const {id} = req.params;
+        const results = await disable(id);
+        res.status(200).json(results);
     } catch (error) {
         console.log(error);
         const message = validateError(error);
@@ -88,27 +96,9 @@ const disa = async(req, res = Response) => {
 
 const ena = async(req, res = Response) => {
     try {
-        
-    } catch (error) {
-        console.log(error);
-        const message = validateError(error);
-        res.status(400).json({message});
-    }
-};
-
-const newPass = async(req, res = Response) => {
-    try {
-        
-    } catch (error) {
-        console.log(error);
-        const message = validateError(error);
-        res.status(400).json({message});
-    }
-};
-
-const tempPass = async(req, res = Response) => {
-    try {
-        
+        const {id} = req.params;
+        const results = await enable(id);
+        res.status(200).json(results);
     } catch (error) {
         console.log(error);
         const message = validateError(error);
@@ -124,9 +114,7 @@ userRouter.post(`/save`, [], insert);
 userRouter.post(`/register`, [], register);
 userRouter.put(`/update`, [], modific);
 userRouter.put(`/disable/:id`, [], disa);
-userRouter.get(`/enable/:token`, [], ena);
-userRouter.put(`/forgotpasswrd`, [], tempPass);
-userRouter.put(`/newpasswrd`, [], newPass);
+userRouter.put(`/enable/:id`, [], ena);
 
 module.exports = {
     userRouter
