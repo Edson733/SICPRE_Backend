@@ -38,8 +38,8 @@ const getById = async(req, res = response) => {
 
 const insert = async(req, res = response) => {
     try {
-        const {rfc, name, dirFis, dirSuc, phone, email} = req.body;
-        const results = await save({rfc, name, dirFis, dirSuc, phone, email});
+        const {rfc_pvd, name_pvd, dirFis_pvd, dirSuc_pvd, phone_pvd, email_pvd} = req.body;
+        const results = await save({rfc_pvd, name_pvd, dirFis_pvd, dirSuc_pvd, phone_pvd, email_pvd});
         res.status(200).json({results});
     } catch (err) {
         console.log(err);
@@ -50,7 +50,9 @@ const insert = async(req, res = response) => {
 
 const modific = async(req, res = response) => {
     try {
-        
+        const {rfc_pvd, name_pvd, dirFis_pvd, dirSuc_pvd, phone_pvd, email_pvd, id_pvd} = req.body;
+        const results = await update({rfc_pvd, name_pvd, dirFis_pvd, dirSuc_pvd, phone_pvd, email_pvd, id_pvd});
+        res.status(200).json({results});
     } catch (err) {
         console.log(err);
         const message = validateError(err);
@@ -60,7 +62,9 @@ const modific = async(req, res = response) => {
 
 const disa = async(req, res = response) => {
     try {
-        
+        const {id} = req.params;
+        const results = await disable(id);
+        res.status(200).json(results);
     } catch (err) {
         console.log(err);
         const message = validateError(err);
@@ -70,7 +74,9 @@ const disa = async(req, res = response) => {
 
 const ena = async(req, res = response) => {
     try {
-        
+        const {id} = req.params;
+        const results = await enable(id);
+        res.status(200).json(results);
     } catch (err) {
         console.log(err);
         const message = validateError(err);

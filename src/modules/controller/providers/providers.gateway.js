@@ -18,16 +18,16 @@ const findById = async(id) => {
 };
 
 const save = async(provider) => {
-    if(!provider.rfc || !provider.name || !provider.dirFis || !provider.dirSuc || !provider.phone || !provider.email) throw Error('Missing fields');
+    if(!provider.rfc_pvd || !provider.name_pvd || !provider.dirFis_pvd || !provider.dirSuc_pvd || !provider.phone_pvd || !provider.email_pvd) throw Error('Missing fields');
     const sql = `INSERT INTO providers(rfc_pvd, name_pvd, dirFis_pvd, dirSuc_pvd, phone_pvd, email_pvd) VALUES(?, ?, ?, ?, ?, ?);`;
-    const {insertedId} = await query(sql, [provider.rfc, provider.name, provider.dirFis, provider.dirSuc, provider.phone, provider.email]);
+    const {insertedId} = await query(sql, [provider.rfc_pvd, provider.name_pvd, provider.dirFis_pvd, provider.dirSuc_pvd, provider.phone_pvd, provider.email_pvd]);
     return {...provider, id: insertedId};
 };
 
 const update = async(provider) => {
-    if(!provider.rfc || !provider.name || !provider.dirFis || !provider.dirSuc || !provider.phone || !provider.email || !provider.id) throw Error('Missing fields');
+    if(!provider.rfc_pvd || !provider.name_pvd || !provider.dirFis_pvd || !provider.dirSuc_pvd || !provider.phone_pvd || !provider.email_pvd || !provider.id_pvd) throw Error('Missing fields');
     const sql = `UPDATE providers SET rfc_pvd = ?, name_pvd = ?, dirFis_pvd = ?, dirSuc_pvd = ?, phone_pvd = ?, email_pvd = ?, status_pvd = 1 WHERE id_pvd = ?;`;
-    return await query(sql, [provider.rfc, provider.name, provider.dirFis, provider.dirSuc, provider.phone, provider.email, provider.id]);
+    return await query(sql, [provider.rfc_pvd, provider.name_pvd, provider.dirFis_pvd, provider.dirSuc_pvd, provider.phone_pvd, provider.email_pvd, provider.id_pvd]);
 };
 
 const disable = async(id) => {
