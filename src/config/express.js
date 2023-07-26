@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const {userRouter, providerRouter} = require('../modules/controller/router');
+const {userRouter, providerRouter, provider_controlRouter} = require('../modules/controller/router');
 require('dotenv').config(); //Importaciones
 
 const app = express(); //Instanciar server
@@ -18,6 +18,7 @@ app.get("/", (request, response) => {
 //Endpoints
 app.use('/sicpre/api/users', userRouter);
 app.use('/sicpre/api/providers', providerRouter);
+app.use('/sicpre/api/providers-control', provider_controlRouter);
 
 module.exports = {
     app
