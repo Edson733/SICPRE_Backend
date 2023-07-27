@@ -11,8 +11,8 @@ const findEnable = async() => {
 };
 
 const findById = async(id) => {
-    if (Number.isNaN(id)) throw Error('Wrong type');
-    if (!id) throw Error('Missing fields');
+    if(Number.isNaN(id)) throw Error('Wrong type');
+    if(!id) throw Error('Missing fields');
     const sql = `SELECT * FROM providers WHERE id_pvd = ?;`;
     return await query(sql, [id]);
 };
