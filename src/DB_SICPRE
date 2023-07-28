@@ -1,0 +1,181 @@
+drop database if exists sicpre;
+create database sicpre;
+use sicpre;
+
+drop table providers;
+drop table provider_control;
+drop table products;
+drop table users;
+drop table sales;
+
+alter table provider_control modify limCre_pcl double not null;
+alter table products add nombre_pdt varchar(100) not null;
+ALTER TABLE users DROP fechaCreacion_usr;
+
+-- pvd----------------------------------------------------
+create table providers(
+	id_pvd int primary key auto_increment,
+    rfc_pvd varchar(20) not null,
+    name_pvd varchar(100) not null,
+    dirFis_pvd varchar(100) not null,
+    dirSuc_pvd varchar(100) not null,
+    phone_pvd varchar(100) not null,
+    email_pvd varchar(100) not null,
+    status_pvd tinyint not null default 1
+);
+
+select * from providers; -- All
+select * from providers where id_pvd = 1; -- Id
+select * from providers where status_pvd = 1; -- Status
+insert into providers(rfc_pvd, name_pvd, dirFis_pvd, dirSuc_pvd, phone_pvd, email_pvd) 
+	values("PID170429GJ0", "Centro de Innovacion y Diseño(CID)", "11 Sur 2104, Primer Piso, Colonia Centro, Puebla, Mexico", 
+    "11 Sur 2104, Primer Piso, Colonia Centro, Puebla, Mexico", "222 918 92 56", "asistencia@cidpuebla.com"); -- Save
+update providers set rfc_pvd = "PID170429GJ0", name_pvd = "Centro de Innovacion y Diseño(CID)", 
+	dirFis_pvd = "11 Sur 2104, Primer Piso, Colonia Centro, Puebla, Mexico", dirSuc_pvd = "11 Sur 2104, Primer Piso, Colonia Centro, Puebla, Mexico", 
+    phone_pvd = "222 918 92 56", email_pvd = "asistencia@cidpuebla.com", status_pvd = 1 where id_pvd = 1; -- Update
+update providers set status_pvd = 1 where id_pvd = 1; -- Habilitar
+update providers set status_pvd = 0 where id_pvd = 1; -- Inhabilitar
+
+-- pcl------------------------------------------------------
+create table provider_control(
+	id_pcl int primary key auto_increment,
+    prinCont_pcl varchar(100) not null,
+    numExt_pcl int not null,
+    sitWeb_pcl varchar(100) not null,
+    startDate_pcl date not null,
+    evalDes_pcl int not null,
+	category_pcl varchar(50) not null,
+    limCre_pcl double not null,
+    hisPag_pcl int not null,
+    datBan_pcl varchar(300) not null,
+    comentary_pcl varchar(500) not null,
+    provider_pcl_pvd int not null,
+    status_pcl tinyint not null default 1,
+    foreign key(provider_pcl_pvd) references providers(id_pvd)
+);
+
+SELECT provider_control.id_pcl, provider_control.prinCont_pcl, provider_control.numExt_pcl, provider_control.sitWeb_pcl, provider_control.startDate_pcl, 
+	provider_control.evalDes_pcl, provider_control.category_pcl, provider_control.limCre_pcl, provider_control.hisPag_pcl, provider_control.datBan_pcl, 
+    provider_control.comentary_pcl, providers.name_pvd, provider_control.status_pcl FROM provider_control JOIN providers 
+    ON provider_control.provider_pcl_pvd = providers.id_pvd; -- All
+SELECT provider_control.id_pcl, provider_control.prinCont_pcl, provider_control.numExt_pcl, provider_control.sitWeb_pcl, provider_control.startDate_pcl, 
+	provider_control.evalDes_pcl, provider_control.category_pcl, provider_control.limCre_pcl, provider_control.hisPag_pcl, provider_control.datBan_pcl, 
+    provider_control.comentary_pcl, providers.name_pvd, provider_control.status_pcl FROM provider_control JOIN providers 
+    ON provider_control.provider_pcl_pvd = providers.id_pvd WHERE id_pcl = 1; -- Id
+SELECT provider_control.id_pcl, provider_control.prinCont_pcl, provider_control.numExt_pcl, provider_control.sitWeb_pcl, provider_control.startDate_pcl, 
+	provider_control.evalDes_pcl, provider_control.category_pcl, provider_control.limCre_pcl, provider_control.hisPag_pcl, provider_control.datBan_pcl, 
+    provider_control.comentary_pcl, providers.name_pvd, provider_control.status_pcl FROM provider_control JOIN providers 
+    ON provider_control.provider_pcl_pvd = providers.id_pvd WHERE status_pcl = 1; -- Status
+INSERT INTO provider_control(prinCont_pcl, numExt_pcl, sitWeb_pcl, startDate_pcl, evalDes_pcl, category_pcl, limCre_pcl, hisPag_pcl, datBan_pcl, 
+	comentary_pcl, provider_pcl_pvd) VALUES("Armando Hernandez", 52, "wwww.sitioweb.com", "2023-05-14", 3, "Ropa", 1000, 5, 
+    "Datos Bancarios", "Sin Comentarios", 1); -- Save
+UPDATE provider_control SET prinCont_pcl = "Rebeca Lopez Avila", numExt_pcl = 52, sitWeb_pcl = "www.sitioweb.com", startDate_pcl = "2023-05-14", 
+	evalDes_pcl = 3, category_pcl = "Tela", limCre_pcl = 2000, hisPag_pcl = 5, datBan_pcl = "Datos Bancarios", comentary_pcl = "Sin Comentarios", 
+	provider_pcl_pvd = 1, status_pcl = 1 WHERE id_pcl = 1; -- Update
+UPDATE provider_control SET status_pcl = 1 WHERE id_pcl = 1; -- Habilitar
+UPDATE provider_control SET status_pcl = 0 WHERE id_pcl = 1; -- Inhabilitar
+
+-- pdt-------------------------------------------------------
+create table products(
+	id_pdt int primary key auto_increment,
+    fit_pdt varchar(50) not null,
+    num_pdt int not null,
+    skuPrenda_pdt varchar(50) not null,
+    nombre_pdt varchar(100) not null,
+    matKin_pdt varchar(50) not null,
+    talla_pdt varchar(50) not null,
+    consumo_pdt double not null,
+    tipTela_pdt varchar(100) not null,
+    costoMT_pdt double not null,
+    costoTela_pdt double not null,
+    costoEtiqueta_pdt double not null,
+    costoBoton_pdt double not null,
+    costoMaquila_pdt double not null,
+    costoAcabado_pdt double not null,
+    costoBordSeri_pdt double not null,
+    costoEmpaque_pdt double not null,
+    costoTrans_pdt double not null,
+    costoAdmin_pdt double not null,
+    costoOtro_pdt double not null,
+    comisVenta_pdt double not null,
+    sumaTotal_pdt double as(costoTela_pdt + 
+		costoEtiqueta_pdt + costoBoton_pdt + 
+		costoMaquila_pdt + costoAcabado_pdt + 
+        costoBordSeri_pdt + costoEmpaque_pdt + 
+        costoTrans_pdt + costoAdmin_pdt + 
+        costoOtro_pdt + comisVenta_pdt),
+	status_pdt tinyint not null default 1,
+    provider_pdt int not null,
+    foreign key(provider_pdt) references providers(id_pvd)
+);
+
+SELECT products.id_pdt, products.fit_pdt, products.num_pdt, products.skuPrenda_pdt, products.nombre_pdt, products.matKin_pdt, products.talla_pdt, 
+	products.consumo_pdt, products.tipTela_pdt, products.costoMT_pdt, products.costoTela_pdt, products.costoEtiqueta_pdt, products.costoBoton_pdt, 
+    products.costoMaquila_pdt, products.costoAcabado_pdt, products.costoBordSeri_pdt, products.costoEmpaque_pdt, products.costoTrans_pdt, 
+    products.costoAdmin_pdt, products.costoOtro_pdt, products.comisVenta_pdt, products.sumaTotal_pdt, providers.name_pvd, products.status_pdt 
+    FROM products JOIN providers ON products.provider_pdt = providers.id_pvd; -- All
+SELECT products.id_pdt, products.fit_pdt, products.num_pdt, products.skuPrenda_pdt, products.nombre_pdt, products.matKin_pdt, products.talla_pdt, 
+	products.consumo_pdt, products.tipTela_pdt, products.costoMT_pdt, products.costoTela_pdt, products.costoEtiqueta_pdt, products.costoBoton_pdt, 
+    products.costoMaquila_pdt, products.costoAcabado_pdt, products.costoBordSeri_pdt, products.costoEmpaque_pdt, products.costoTrans_pdt, 
+    products.costoAdmin_pdt, products.costoOtro_pdt, products.comisVenta_pdt, products.sumaTotal_pdt, providers.name_pvd, products.status_pdt 
+    FROM products JOIN providers ON products.provider_pdt = providers.id_pvd WHERE id_pdt = 1; -- Id
+SELECT products.id_pdt, products.fit_pdt, products.num_pdt, products.skuPrenda_pdt, products.nombre_pdt, products.matKin_pdt, products.talla_pdt, 
+	products.consumo_pdt, products.tipTela_pdt, products.costoMT_pdt, products.costoTela_pdt, products.costoEtiqueta_pdt, products.costoBoton_pdt, 
+    products.costoMaquila_pdt, products.costoAcabado_pdt, products.costoBordSeri_pdt, products.costoEmpaque_pdt, products.costoTrans_pdt, 
+    products.costoAdmin_pdt, products.costoOtro_pdt, products.comisVenta_pdt, products.sumaTotal_pdt, providers.name_pvd, products.status_pdt 
+    FROM products JOIN providers ON products.provider_pdt = providers.id_pvd WHERE status_pdt = 1; -- Status
+INSERT INTO products(fit_pdt, num_pdt, skuPrenda_pdt, nombre_pdt, matKin_pdt, talla_pdt, consumo_pdt, tipTela_pdt, costoMT_pdt, costoTela_pdt, costoEtiqueta_pdt, 
+	costoBoton_pdt, costoMaquila_pdt, costoAcabado_pdt, costoBordSeri_pdt, costoEmpaque_pdt, costoTrans_pdt, costoAdmin_pdt, costoOtro_pdt, 
+    comisVenta_pdt, provider_pdt) VALUES("NIÑA", 1, "n1", "Jumper (nuevo diseño y tela)", "MATERNAL Y KINDER", "S-M-L", 0.50, 
+    "REF 160 - Variante 1 - AcrilPol", 79, 39.5, 2, 1, 35, 5, 15, 12, 8, 15, 10, 15, 1); -- Save
+UPDATE products SET fit_pdt = "NIÑA", num_pdt = 1, skuPrenda_pdt = "n1", nombre_pdt = "Jumper (nuevo diseño y tela)", matKin_pdt = "MATERNAL Y KINDER", 
+	talla_pdt = "S-M-L", consumo_pdt = 0.50, tipTela_pdt = "REF 160 - Variante 1 - AcrilPol", costoMT_pdt = 79, costoTela_pdt = 39.5, costoEtiqueta_pdt = 2, 
+    costoBoton_pdt = 1, costoMaquila_pdt = 35, costoAcabado_pdt = 5, costoBordSeri_pdt = 15, costoEmpaque_pdt = 12, costoTrans_pdt = 8, costoAdmin_pdt = 15, 
+    costoOtro_pdt = 10, comisVenta_pdt = 15, status_pdt = 1, provider_pdt = 1 WHERE id_pdt = 1; -- Update
+UPDATE products SET status_pdt = 1 WHERE id_pdt = 1; -- Habilitar
+UPDATE products SET status_pdt = 0 WHERE id_pdt = 1; -- Inhabilitar
+
+-- usr-------------------------------------------------------
+create table users(
+	usuarioId_usr int primary key auto_increment,
+    name_usr varchar(50) not null,
+    lastname_usr varchar(50) not null,
+    rol_usr varchar(50) not null,
+    email_usr varchar(100) not null,
+    password_usr varchar(100) not null,
+    status_usr tinyint not null default 1
+);
+
+SELECT * FROM users WHERE email_usr = "edson@gmail.com" && password_usr = "123456" && status_usr = 1; -- Login
+
+SELECT * FROM users; -- All
+SELECT * FROM users WHERE usuarioId_usr = 1; -- Id
+SELECT * FROM users WHERE status_usr = 1; -- Status
+INSERT INTO users(name_usr, lastname_usr, rol_usr, email_usr, password_usr) 
+	VALUES("Edson", "Peralta", "Administrador", "edson@gmail.com", "123456"); -- Save
+UPDATE users SET name_usr = "Edson", lastname_usr = "Peralta", rol_usr = "Administrador", email_usr = "edson@gmail.com", password_usr = "123456", 
+	status_usr = 1 WHERE usuarioId_usr = 1; -- Update
+UPDATE users SET status_usr = 1 WHERE usuarioId_usr = 1; -- Habilitar
+UPDATE users SET status_usr = 0 WHERE usuarioId_usr = 1; -- Inhabilitar
+
+-- sls--------------------------------------------------------
+create table sales(
+	id_sls int primary key auto_increment,
+    product_sls int not null,
+    client_sls int not null,
+    totalCount_sls double not null,
+    status_sls tinyint not null default 1,
+    foreign key(product_sls) references products(id_pdt),
+    foreign key(client_sls) references users(usuarioId_usr)
+);
+
+SELECT sales.id_sls, products.nombre_pdt, users.name_usr, sales.totalCount_sls, sales.status_sls FROM sales JOIN products JOIN users 
+	ON sales.product_sls = products.id_pdt && sales.client_sls = users.usuarioId_usr; -- All
+SELECT sales.id_sls, products.nombre_pdt, users.name_usr, sales.totalCount_sls, sales.status_sls FROM sales JOIN products JOIN users 
+	ON sales.product_sls = products.id_pdt && sales.client_sls = users.usuarioId_usr WHERE id_sls = 1; -- Id
+SELECT sales.id_sls, products.nombre_pdt, users.name_usr, sales.totalCount_sls, sales.status_sls FROM sales JOIN products JOIN users 
+	ON sales.product_sls = products.id_pdt && sales.client_sls = users.usuarioId_usr WHERE status_sls = 1; -- Status
+INSERT INTO sales(product_sls, client_sls, totalCount_sls) VALUES(1, 1, 160.8); -- Save
+UPDATE sales SET product_sls = 1, client_sls = 1, totalCount_sls = 170.5, status_sls = 1 WHERE id_sls = 1; -- Update
+UPDATE sales SET status_sls = 1 WHERE id_sls = 1; -- Habilitar
+UPDATE sales SET status_sls = 0 WHERE id_sls = 1; -- Inhabilitar
