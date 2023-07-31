@@ -16,12 +16,12 @@ app.get("/", (request, response) => {
 });
 
 //Endpoints
-app.use('/sicpre/api/users', userRouter);
-app.use('/sicpre/api/providers', providerRouter);
-app.use('/sicpre/api/providers-control', provider_controlRouter);
-app.use('/sicpre/api/products', productRouter);
-app.use('/sicpre/api/sales', salesRouter);
-app.use('/sicpre/api/auth', authRouter);
+app.use('/api-sicpre/users', userRouter);
+app.use('/api-sicpre/providers', providerRouter);
+app.use('/api-sicpre/providers-control', provider_controlRouter);
+app.use('/api-sicpre/products', productRouter);
+app.use('/api-sicpre/sales', salesRouter);
+app.use('/api-sicpre/auth', authRouter);
 
 module.exports = {
     app
