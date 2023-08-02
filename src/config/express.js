@@ -4,7 +4,7 @@ const {userRouter, providerRouter, provider_controlRouter, productRouter, salesR
 require('dotenv').config(); //Importaciones
 
 const app = express(); //Instanciar server
-app.set("port", process.env.PORT || 3000);
+app.set("port", process.env.PORT || 8080);
 
 //Middlewares
 app.use(cors({origins: '*'})); //Permite recibir cualquier peticion con X origen
