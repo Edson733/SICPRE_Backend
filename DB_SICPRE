@@ -8,10 +8,6 @@ drop table products;
 drop table users;
 drop table sales;
 
-alter table provider_control modify limCre_pcl double not null;
-alter table products add nombre_pdt varchar(100) not null;
-ALTER TABLE users DROP fechaCreacion_usr;
-
 -- pvd----------------------------------------------------
 create table providers(
 	id_pvd int primary key auto_increment,
@@ -104,6 +100,7 @@ create table products(
         costoBordSeri_pdt + costoEmpaque_pdt + 
         costoTrans_pdt + costoAdmin_pdt + 
         costoOtro_pdt + comisVenta_pdt),
+	image_pdt mediumtext not null,
 	status_pdt tinyint not null default 1,
     provider_pdt int not null,
     foreign key(provider_pdt) references providers(id_pvd)
@@ -112,26 +109,26 @@ create table products(
 SELECT products.id_pdt, products.fit_pdt, products.num_pdt, products.skuPrenda_pdt, products.nombre_pdt, products.matKin_pdt, products.talla_pdt, 
 	products.consumo_pdt, products.tipTela_pdt, products.costoMT_pdt, products.costoTela_pdt, products.costoEtiqueta_pdt, products.costoBoton_pdt, 
     products.costoMaquila_pdt, products.costoAcabado_pdt, products.costoBordSeri_pdt, products.costoEmpaque_pdt, products.costoTrans_pdt, 
-    products.costoAdmin_pdt, products.costoOtro_pdt, products.comisVenta_pdt, products.sumaTotal_pdt, providers.name_pvd, products.status_pdt 
-    FROM products JOIN providers ON products.provider_pdt = providers.id_pvd; -- All
+    products.costoAdmin_pdt, products.costoOtro_pdt, products.comisVenta_pdt, products.sumaTotal_pdt, products.image_pdt, providers.name_pvd, 
+    products.status_pdt FROM products JOIN providers ON products.provider_pdt = providers.id_pvd; -- All
 SELECT products.id_pdt, products.fit_pdt, products.num_pdt, products.skuPrenda_pdt, products.nombre_pdt, products.matKin_pdt, products.talla_pdt, 
 	products.consumo_pdt, products.tipTela_pdt, products.costoMT_pdt, products.costoTela_pdt, products.costoEtiqueta_pdt, products.costoBoton_pdt, 
     products.costoMaquila_pdt, products.costoAcabado_pdt, products.costoBordSeri_pdt, products.costoEmpaque_pdt, products.costoTrans_pdt, 
-    products.costoAdmin_pdt, products.costoOtro_pdt, products.comisVenta_pdt, products.sumaTotal_pdt, providers.name_pvd, products.status_pdt 
-    FROM products JOIN providers ON products.provider_pdt = providers.id_pvd WHERE id_pdt = 1; -- Id
+    products.costoAdmin_pdt, products.costoOtro_pdt, products.comisVenta_pdt, products.sumaTotal_pdt, products.image_pdt, providers.name_pvd, 
+    products.status_pdt FROM products JOIN providers ON products.provider_pdt = providers.id_pvd WHERE id_pdt = 1; -- Id
 SELECT products.id_pdt, products.fit_pdt, products.num_pdt, products.skuPrenda_pdt, products.nombre_pdt, products.matKin_pdt, products.talla_pdt, 
 	products.consumo_pdt, products.tipTela_pdt, products.costoMT_pdt, products.costoTela_pdt, products.costoEtiqueta_pdt, products.costoBoton_pdt, 
     products.costoMaquila_pdt, products.costoAcabado_pdt, products.costoBordSeri_pdt, products.costoEmpaque_pdt, products.costoTrans_pdt, 
-    products.costoAdmin_pdt, products.costoOtro_pdt, products.comisVenta_pdt, products.sumaTotal_pdt, providers.name_pvd, products.status_pdt 
-    FROM products JOIN providers ON products.provider_pdt = providers.id_pvd WHERE status_pdt = 1; -- Status
+    products.costoAdmin_pdt, products.costoOtro_pdt, products.comisVenta_pdt, products.sumaTotal_pdt, products.image_pdt, providers.name_pvd, 
+    products.status_pdt FROM products JOIN providers ON products.provider_pdt = providers.id_pvd WHERE status_pdt = 1; -- Status
 INSERT INTO products(fit_pdt, num_pdt, skuPrenda_pdt, nombre_pdt, matKin_pdt, talla_pdt, consumo_pdt, tipTela_pdt, costoMT_pdt, costoTela_pdt, costoEtiqueta_pdt, 
 	costoBoton_pdt, costoMaquila_pdt, costoAcabado_pdt, costoBordSeri_pdt, costoEmpaque_pdt, costoTrans_pdt, costoAdmin_pdt, costoOtro_pdt, 
-    comisVenta_pdt, provider_pdt) VALUES("NIÑA", 1, "n1", "Jumper (nuevo diseño y tela)", "MATERNAL Y KINDER", "S-M-L", 0.50, 
-    "REF 160 - Variante 1 - AcrilPol", 79, 39.5, 2, 1, 35, 5, 15, 12, 8, 15, 10, 15, 1); -- Save
+    comisVenta_pdt, image_pdt, provider_pdt) VALUES("NIÑA", 1, "n1", "Jumper (nuevo diseño y tela)", "MATERNAL Y KINDER", "S-M-L", 0.50, 
+    "REF 160 - Variante 1 - AcrilPol", 79, 39.5, 2, 1, 35, 5, 15, 12, 8, 15, 10, 15, "Jumper", 1); -- Save
 UPDATE products SET fit_pdt = "NIÑA", num_pdt = 1, skuPrenda_pdt = "n1", nombre_pdt = "Jumper (nuevo diseño y tela)", matKin_pdt = "MATERNAL Y KINDER", 
 	talla_pdt = "S-M-L", consumo_pdt = 0.50, tipTela_pdt = "REF 160 - Variante 1 - AcrilPol", costoMT_pdt = 79, costoTela_pdt = 39.5, costoEtiqueta_pdt = 2, 
     costoBoton_pdt = 1, costoMaquila_pdt = 35, costoAcabado_pdt = 5, costoBordSeri_pdt = 15, costoEmpaque_pdt = 12, costoTrans_pdt = 8, costoAdmin_pdt = 15, 
-    costoOtro_pdt = 10, comisVenta_pdt = 15, status_pdt = 1, provider_pdt = 1 WHERE id_pdt = 1; -- Update
+    costoOtro_pdt = 10, comisVenta_pdt = 15, image_pdt = "Jumper1", status_pdt = 1, provider_pdt = 1 WHERE id_pdt = 1; -- Update
 UPDATE products SET status_pdt = 1 WHERE id_pdt = 1; -- Habilitar
 UPDATE products SET status_pdt = 0 WHERE id_pdt = 1; -- Inhabilitar
 
@@ -140,7 +137,7 @@ create table users(
 	usuarioId_usr int primary key auto_increment,
     name_usr varchar(50) not null,
     lastname_usr varchar(50) not null,
-    rol_usr varchar(50) not null,
+    role_usr varchar(50) not null,
     email_usr varchar(100) not null,
     password_usr varchar(100) not null,
     status_usr tinyint not null default 1
@@ -151,9 +148,9 @@ SELECT * FROM users WHERE email_usr = "edson@gmail.com" && password_usr = "12345
 SELECT * FROM users; -- All
 SELECT * FROM users WHERE usuarioId_usr = 1; -- Id
 SELECT * FROM users WHERE status_usr = 1; -- Status
-INSERT INTO users(name_usr, lastname_usr, rol_usr, email_usr, password_usr) 
+INSERT INTO users(name_usr, lastname_usr, role_usr, email_usr, password_usr) 
 	VALUES("Edson", "Peralta", "Administrador", "edson@gmail.com", "123456"); -- Save
-UPDATE users SET name_usr = "Edson", lastname_usr = "Peralta", rol_usr = "Administrador", email_usr = "edson@gmail.com", password_usr = "123456", 
+UPDATE users SET name_usr = "Edson", lastname_usr = "Peralta", role_usr = "Administrador", email_usr = "edson@gmail.com", password_usr = "123456", 
 	status_usr = 1 WHERE usuarioId_usr = 1; -- Update
 UPDATE users SET status_usr = 1 WHERE usuarioId_usr = 1; -- Habilitar
 UPDATE users SET status_usr = 0 WHERE usuarioId_usr = 1; -- Inhabilitar

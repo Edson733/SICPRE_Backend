@@ -40,10 +40,10 @@ const insert = async(req, res = response) => {
     try {
         const {fit_pdt, num_pdt, skuPrenda_pdt, nombre_pdt, matKin_pdt, talla_pdt, consumo_pdt, tipTela_pdt, costoMT_pdt, costoTela_pdt, 
             costoEtiqueta_pdt, costoBoton_pdt, costoMaquila_pdt, costoAcabado_pdt, costoBordSeri_pdt, costoEmpaque_pdt, costoTrans_pdt, 
-            costoAdmin_pdt, costoOtro_pdt, comisVenta_pdt, provider_pdt} = req.body;
+            costoAdmin_pdt, costoOtro_pdt, comisVenta_pdt, image_pdt, provider_pdt} = req.body;
         const results = await save({fit_pdt, num_pdt, skuPrenda_pdt, nombre_pdt, matKin_pdt, talla_pdt, consumo_pdt, tipTela_pdt, costoMT_pdt, 
             costoTela_pdt, costoEtiqueta_pdt, costoBoton_pdt, costoMaquila_pdt, costoAcabado_pdt, costoBordSeri_pdt, costoEmpaque_pdt, 
-            costoTrans_pdt, costoAdmin_pdt, costoOtro_pdt, comisVenta_pdt, provider_pdt});
+            costoTrans_pdt, costoAdmin_pdt, costoOtro_pdt, comisVenta_pdt, image_pdt, provider_pdt});
         res.status(200).json({results});
     } catch (err) {
         console.log(err);
@@ -56,10 +56,10 @@ const modific = async(req, res = response) => {
     try {
         const {fit_pdt, num_pdt, skuPrenda_pdt, nombre_pdt, matKin_pdt, talla_pdt, consumo_pdt, tipTela_pdt, costoMT_pdt, costoTela_pdt, 
             costoEtiqueta_pdt, costoBoton_pdt, costoMaquila_pdt, costoAcabado_pdt, costoBordSeri_pdt, costoEmpaque_pdt, costoTrans_pdt, 
-            costoAdmin_pdt, costoOtro_pdt, comisVenta_pdt, provider_pdt, id_pdt} = req.body;
-        const results = await update({fit_pdt, num_pdt, skuPrenda_pdt, nombre_pdt, matKin_pdt, talla_pdt, consumo_pdt, tipTela_pdt, costoMT_pdt, costoTela_pdt, 
-            costoEtiqueta_pdt, costoBoton_pdt, costoMaquila_pdt, costoAcabado_pdt, costoBordSeri_pdt, costoEmpaque_pdt, costoTrans_pdt, 
-            costoAdmin_pdt, costoOtro_pdt, comisVenta_pdt, provider_pdt, id_pdt});
+            costoAdmin_pdt, costoOtro_pdt, comisVenta_pdt, image_pdt, provider_pdt, id_pdt} = req.body;
+        const results = await update({fit_pdt, num_pdt, skuPrenda_pdt, nombre_pdt, matKin_pdt, talla_pdt, consumo_pdt, tipTela_pdt, costoMT_pdt, 
+            costoTela_pdt, costoEtiqueta_pdt, costoBoton_pdt, costoMaquila_pdt, costoAcabado_pdt, costoBordSeri_pdt, costoEmpaque_pdt, 
+            costoTrans_pdt, costoAdmin_pdt, costoOtro_pdt, comisVenta_pdt, image_pdt, provider_pdt, id_pdt});
         res.status(200).json({results});
     } catch (err) {
         console.log(err);

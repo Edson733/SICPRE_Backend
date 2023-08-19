@@ -1,0 +1,51 @@
+### findAll
+GET http://localhost:8080/api-sicpre/providers-control/all HTTP/1.1
+
+### findEnable
+GET http://localhost:8080/api-sicpre/providers-control/all/enable HTTP/1.1
+
+### findById
+GET http://localhost:8080/api-sicpre/providers-control/2 HTTP/1.1
+
+### save
+POST http://localhost:8080/api-sicpre/providers-control/save HTTP/1.1
+Content-Type: application/json
+
+{
+    "prinCont_pcl": "Edson Peralta",
+    "numExt_pcl": 52,
+    "sitWeb_pcl": "wwww.sitioweb.com",
+    "startDate_pcl": "2023-05-24",
+    "evalDes_pcl": 5,
+    "category_pcl": "Zapatos",
+    "limCre_pcl": 3000,
+    "hisPag_pcl": 5,
+    "datBan_pcl": "Datos Bancarios",
+    "comentary_pcl": "Sin Comentarios",
+    "provider_pcl_pvd": 1
+}
+
+### update
+PUT http://localhost:8080/api-sicpre/providers-control/update HTTP/1.1
+Content-Type: application/json
+
+{
+    "id_pcl": 2,
+    "prinCont_pcl": "Edson Peralta",
+    "numExt_pcl": 52,
+    "sitWeb_pcl": "wwww.sitioweb.com",
+    "startDate_pcl": "2023-05-24",
+    "evalDes_pcl": 5,
+    "category_pcl": "Zapatos",
+    "limCre_pcl": 3000,
+    "hisPag_pcl": 5,
+    "datBan_pcl": "Datos Bancarios",
+    "comentary_pcl": "Sin Comentarios",
+    "provider_pcl_pvd": 1
+}
+
+### disable
+PUT http://localhost:8080/api-sicpre/providers-control/disable/2 HTTP/1.1
+
+### enable
+PUT http://localhost:8080/api-sicpre/providers-control/enable/2 HTTP/1.1

@@ -38,8 +38,8 @@ const getById = async(req, res = response) => {
 
 const insert = async(req, res = response) => {
     try {
-        const {name_usr, lastname_usr, rol_usr, email_usr, password_usr} = req.body;
-        const results = await save({name_usr, lastname_usr, rol_usr, email_usr, password_usr});
+        const {name_usr, lastname_usr, role_usr, email_usr, password_usr} = req.body;
+        const results = await save({name_usr, lastname_usr, role_usr, email_usr, password_usr});
         res.status(200).json({results});
     } catch (err) {
         console.log(err);
@@ -62,8 +62,8 @@ const register = async(req, res = response) => {
 
 const modific = async(req, res = response) => {
     try {
-        const {name_usr, lastname_usr, rol_usr, email_usr, password_usr, usuarioId_usr} = req.body;
-        const results = await update({name_usr, lastname_usr, rol_usr, email_usr, password_usr, usuarioId_usr});
+        const {name_usr, lastname_usr, role_usr, email_usr, password_usr, usuarioId_usr} = req.body;
+        const results = await update({name_usr, lastname_usr, role_usr, email_usr, password_usr, usuarioId_usr});
         res.status(200).json({results});
     } catch (err) {
         console.log(err);

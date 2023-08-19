@@ -1,0 +1,35 @@
+### findAll
+GET http://localhost:8080/api-sicpre/sales/all HTTP/1.1
+
+### findEnable
+GET http://localhost:8080/api-sicpre/sales/all/enable HTTP/1.1
+
+### findById
+GET http://localhost:8080/api-sicpre/sales/2 HTTP/1.1
+
+### save
+POST http://localhost:8080/api-sicpre/sales/save HTTP/1.1
+Content-Type: application/json
+
+{
+    "product_sls": 2,
+    "client_sls": 3,
+    "totalCount_sls": 160.8
+}
+
+### update
+PUT http://localhost:8080/api-sicpre/sales/update HTTP/1.1
+Content-Type: application/json
+
+{
+    "id_sls": 2,
+    "product_sls": 1,
+    "client_sls": 3,
+    "totalCount_sls": 175.6
+}
+
+### disable
+PUT http://localhost:8080/api-sicpre/sales/disable/2 HTTP/1.1
+
+### enable
+PUT http://localhost:8080/api-sicpre/sales/enable/2 HTTP/1.1

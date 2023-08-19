@@ -13,7 +13,7 @@ const login = async(email, password) => {
                 id: existUser[0].usuarioId_usr,
                 email: email,
                 password: password,
-                role: existUser[0].rol_usr
+                role: existUser[0].role_usr
             })
         };
     }
