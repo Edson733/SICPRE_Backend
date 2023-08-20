@@ -44,7 +44,7 @@ Content-Type: application/json
 }
 
 ### disable
-PUT http://localhost:8080/api-sicpre/users/disable/2 HTTP/1.1
+PUT http://localhost:8080/api-sicpre/users/disable/1 HTTP/1.1
 
 ### enable
-PUT http://localhost:8080/api-sicpre/users/enable/2 HTTP/1.1
+PUT http://localhost:8080/api-sicpre/users/enable/1 HTTP/1.1
