@@ -12,27 +12,27 @@ POST http://localhost:8080/api-sicpre/products/save HTTP/1.1
 Content-Type: application/json
 
 {
-    "fit_pdt": "NIÑA",
-    "num_pdt": 2,
-    "skuPrenda_pdt": "n2",
-    "nombre_pdt": "Playera polo manga corta",
+    "fit_pdt": "NIÑO",
+    "num_pdt": 4,
+    "skuPrenda_pdt": "n4",
+    "nombre_pdt": "Suéter escolar  (nuevo diseño) unisex",
     "matKin_pdt": "MATERNAL Y KINDER",
     "talla_pdt": "S-M-L",
-    "consumo_pdt": 0.45,
-    "tipTela_pdt": "Piqué Peso Medio 50/50 Bco",
-    "costoMT_pdt": 70,
-    "costoTela_pdt": 31.5,
+    "consumo_pdt": 1,
+    "tipTela_pdt": "COMPRADO",
+    "costoMT_pdt": "120",
+    "costoTela_pdt": "120",
     "costoEtiqueta_pdt": 2,
-    "costoBoton_pdt": 3,
-    "costoMaquila_pdt": 30,
-    "costoAcabado_pdt": 5,
-    "costoBordSeri_pdt": 10,
+    "costoBoton_pdt": 9,
+    "costoMaquila_pdt": 1,
+    "costoAcabado_pdt": 1,
+    "costoBordSeri_pdt": 15,
     "costoEmpaque_pdt": 12,
     "costoTrans_pdt": 8,
     "costoAdmin_pdt": 15,
     "costoOtro_pdt": 10,
     "comisVenta_pdt": 15,
-    "image_pdt": "Playera",
+    "image_pdt": "Sueter",
     "provider_pdt": 1
 }
 
@@ -41,33 +41,33 @@ PUT http://localhost:8080/api-sicpre/products/update HTTP/1.1
 Content-Type: application/json
 
 {
-    "id_pdt": 2,
+    "id_pdt": 3,
     "fit_pdt": "NIÑA",
-    "num_pdt": 2,
-    "skuPrenda_pdt": "n2",
-    "nombre_pdt": "Playera polo manga corta",
+    "num_pdt": 3,
+    "skuPrenda_pdt": "n3",
+    "nombre_pdt": "Suéter escolar  (nuevo diseño) unisex",
     "matKin_pdt": "MATERNAL Y KINDER",
     "talla_pdt": "S-M-L",
-    "consumo_pdt": 0.45,
-    "tipTela_pdt": "Piqué Peso Medio 50/50 Bco",
-    "costoMT_pdt": 70,
-    "costoTela_pdt": 31.5,
+    "consumo_pdt": 1,
+    "tipTela_pdt": "COMPRADO",
+    "costoMT_pdt": 120,
+    "costoTela_pdt": 120,
     "costoEtiqueta_pdt": 2,
-    "costoBoton_pdt": 3,
-    "costoMaquila_pdt": 30,
-    "costoAcabado_pdt": 5,
-    "costoBordSeri_pdt": 10,
+    "costoBoton_pdt": 9,
+    "costoMaquila_pdt": 1,
+    "costoAcabado_pdt": 1,
+    "costoBordSeri_pdt": 15,
     "costoEmpaque_pdt": 12,
     "costoTrans_pdt": 8,
     "costoAdmin_pdt": 15,
     "costoOtro_pdt": 10,
     "comisVenta_pdt": 15,
-    "image_pdt": "Playera",
+    "image_pdt": "Sueter",
     "provider_pdt": 1
 }
 
 ### disable
-PUT http://localhost:8080/api-sicpre/products/disable/2 HTTP/1.1
+PUT http://localhost:8080/api-sicpre/products/disable/3 HTTP/1.1
 
 ### enable
-PUT http://localhost:8080/api-sicpre/products/enable/2 HTTP/1.1
+PUT http://localhost:8080/api-sicpre/products/enable/3 HTTP/1.1

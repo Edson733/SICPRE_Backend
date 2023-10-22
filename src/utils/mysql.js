@@ -10,14 +10,22 @@ const client = mysql.createPool({
     port: process.env.DB_PORT
 }); //Creamos una alberca de conexiones -> Maximo 5 al mismo tiempo
 
-const query = ( sql, params ) => { //1.- Statement 2.- Valores
-    return new Promise(( resolve, reject ) => {
-        client.getConnection(( err, conn ) => {
-            if (err) reject(err);
-            conn.query(sql, params, ( err, rows ) => {
-                if (err) reject(err);
+const query = (sql, params) => { //1.- Statement 2.- Valores
+    return new Promise((resolve, reject) => {
+        client.getConnection((err, conn) => {
+            if (err) {
+                console.error("Error al obtener la conexión: ", err);
+                reject(err);
+                return;
+            }
+            conn.query(sql, params, (err, rows) => {
                 conn.release();
-                resolve(rows);
+                if (err) {
+                    console.error("Error en la consulta: ", err);
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
             });
         });
     });

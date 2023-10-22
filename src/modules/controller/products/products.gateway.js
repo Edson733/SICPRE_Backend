@@ -20,8 +20,8 @@ const findEnable = async() => {
 };
 
 const findById = async(id) => {
-    if (Number.isNaN(id)) throw Error('Wrong type');
-    if (!id) throw Error('Missing fields');
+    if (isNaN(id)) throw Error('Wrong type: Is not number');
+    if (!id) throw Error('Missing fields: id');
     const sql = `SELECT products.id_pdt, products.fit_pdt, products.num_pdt, products.skuPrenda_pdt, products.nombre_pdt, products.matKin_pdt, 
         products.talla_pdt, products.consumo_pdt, products.tipTela_pdt, products.costoMT_pdt, products.costoTela_pdt, products.costoEtiqueta_pdt, 
         products.costoBoton_pdt, products.costoMaquila_pdt, products.costoAcabado_pdt, products.costoBordSeri_pdt, products.costoEmpaque_pdt, 
@@ -32,28 +32,63 @@ const findById = async(id) => {
 };
 
 const save = async(product) => {
-    if(!product.fit_pdt || !product.num_pdt || !product.skuPrenda_pdt || !product.nombre_pdt || !product.matKin_pdt || !product.talla_pdt || 
-        !product.consumo_pdt || !product.tipTela_pdt || !product.costoMT_pdt || !product.costoTela_pdt || !product.costoEtiqueta_pdt || 
-        !product.costoBoton_pdt || !product.costoMaquila_pdt || !product.costoAcabado_pdt || !product.costoBordSeri_pdt || 
-        !product.costoEmpaque_pdt || !product.costoTrans_pdt || !product.costoAdmin_pdt || !product.costoOtro_pdt || !product.comisVenta_pdt || 
-        !product.image_pdt || !product.provider_pdt) throw Error('Missing fields');
+    if(!product.fit_pdt) throw Error('Missing field: fit_pdt');
+    if(!product.num_pdt) throw Error('Missing field: num_pdt');
+    if(!product.skuPrenda_pdt) throw Error('Missing field: skuPrenda_pdt');
+    if(!product.nombre_pdt) throw Error('Missing field: nombre_pdt');
+    if(!product.matKin_pdt) throw Error('Missing field: matKin_pdt');
+    if(!product.talla_pdt) throw Error('Missing field: talla_pdt');
+    if(!product.consumo_pdt) throw Error('Missing field: consumo_pdt');
+    if(!product.tipTela_pdt) throw Error('Missing field: tipTela_pdt');
+    if(!product.costoMT_pdt) throw Error('Missing field: costoMT_pdt');
+    if(!product.costoTela_pdt) throw Error('Missing field: costoTela_pdt');
+    if(!product.costoEtiqueta_pdt) throw Error('Missing field: costoEtiqueta_pdt');
+    if(!product.costoBoton_pdt) throw Error('Missing field: costoBoton_pdt');
+    if(!product.costoMaquila_pdt) throw Error('Missing field: costoMaquila_pdt');
+    if(!product.costoAcabado_pdt) throw Error('Missing field: costoAcabado_pdt');
+    if(!product.costoBordSeri_pdt) throw Error('Missing field: costoBordSeri_pdt');
+    if(!product.costoEmpaque_pdt) throw Error('Missing field: costoEmpaque_pdt');
+    if(!product.costoTrans_pdt) throw Error('Missing field: costoTrans_pdt');
+    if(!product.costoAdmin_pdt) throw Error('Missing field: costoAdmin_pdt');
+    if(!product.costoOtro_pdt) throw Error('Missing field: costoOtro_pdt');
+    if(!product.comisVenta_pdt) throw Error('Missing field: comisVenta_pdt');
+    if(!product.image_pdt) throw Error('Missing field: image_pdt');
+    if(!product.provider_pdt) throw Error('Missing field: provider_pdt');
     const sql = `INSERT INTO products(fit_pdt, num_pdt, skuPrenda_pdt, nombre_pdt, matKin_pdt, talla_pdt, consumo_pdt, tipTela_pdt, costoMT_pdt, 
-        costoTela_pdt, costoEtiqueta_pdt, costoBoton_pdt, costoMaquila_pdt, costoAcabado_pdt, costoBordSeri_pdt, costoEmpaque_pdt, 
-        costoTrans_pdt, costoAdmin_pdt, costoOtro_pdt, comisVenta_pdt, image_pdt, provider_pdt) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
-        ?, ?, ?, ?, ?, ?, ?, ?);`;
+        costoTela_pdt, costoEtiqueta_pdt, costoBoton_pdt, costoMaquila_pdt, costoAcabado_pdt, costoBordSeri_pdt, costoEmpaque_pdt, costoTrans_pdt, 
+        costoAdmin_pdt, costoOtro_pdt, comisVenta_pdt, image_pdt, provider_pdt) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
+        ?, ?, ?);`;
     const {insertedId} = await query(sql, [product.fit_pdt, product.num_pdt, product.skuPrenda_pdt, product.nombre_pdt, product.matKin_pdt, 
-        product.talla_pdt, product.consumo_pdt, product.tipTela_pdt, product.costoMT_pdt, product.costoTela_pdt, product.costoEmpaque_pdt, 
+        product.talla_pdt, product.consumo_pdt, product.tipTela_pdt, product.costoMT_pdt, product.costoTela_pdt, product.costoEtiqueta_pdt, 
         product.costoBoton_pdt, product.costoMaquila_pdt, product.costoAcabado_pdt, product.costoBordSeri_pdt, product.costoEmpaque_pdt, 
         product.costoTrans_pdt, product.costoAdmin_pdt, product.costoOtro_pdt, product.comisVenta_pdt, product.image_pdt, product.provider_pdt]);
     return {...product, id: insertedId};
 };
 
 const update = async(product) => {
-    if(!product.fit_pdt || !product.num_pdt || !product.skuPrenda_pdt || !product.nombre_pdt || !product.matKin_pdt || !product.talla_pdt || 
-        !product.consumo_pdt || !product.tipTela_pdt || !product.costoMT_pdt || !product.costoTela_pdt || !product.costoEtiqueta_pdt || 
-        !product.costoBoton_pdt || !product.costoMaquila_pdt || !product.costoAcabado_pdt || !product.costoBordSeri_pdt || 
-        !product.costoEmpaque_pdt || !product.costoTrans_pdt || !product.costoAdmin_pdt || !product.costoOtro_pdt || !product.comisVenta_pdt || 
-        !product.image_pdt || !product.provider_pdt || !product.id_pdt) throw Error('Missing fields');
+    if(!product.fit_pdt) throw Error('Missing field: fit_pdt');
+    if(!product.num_pdt) throw Error('Missing field: num_pdt');
+    if(!product.skuPrenda_pdt) throw Error('Missing field: skuPrenda_pdt');
+    if(!product.nombre_pdt) throw Error('Missing field: nombre_pdt');
+    if(!product.matKin_pdt) throw Error('Missing field: matKin_pdt');
+    if(!product.talla_pdt) throw Error('Missing field: talla_pdt');
+    if(!product.consumo_pdt) throw Error('Missing field: consumo_pdt');
+    if(!product.tipTela_pdt) throw Error('Missing field: tipTela_pdt');
+    if(!product.costoMT_pdt) throw Error('Missing field: costoMT_pdt');
+    if(!product.costoTela_pdt) throw Error('Missing field: costoTela_pdt');
+    if(!product.costoEtiqueta_pdt) throw Error('Missing field: costoEtiqueta_pdt');
+    if(!product.costoBoton_pdt) throw Error('Missing field: costoBoton_pdt');
+    if(!product.costoMaquila_pdt) throw Error('Missing field: costoMaquila_pdt');
+    if(!product.costoAcabado_pdt) throw Error('Missing field: costoAcabado_pdt');
+    if(!product.costoBordSeri_pdt) throw Error('Missing field: costoBordSeri_pdt');
+    if(!product.costoEmpaque_pdt) throw Error('Missing field: costoEmpaque_pdt');
+    if(!product.costoTrans_pdt) throw Error('Missing field: costoTrans_pdt');
+    if(!product.costoAdmin_pdt) throw Error('Missing field: costoAdmin_pdt');
+    if(!product.costoOtro_pdt) throw Error('Missing field: costoOtro_pdt');
+    if(!product.comisVenta_pdt) throw Error('Missing field: comisVenta_pdt');
+    if(!product.image_pdt) throw Error('Missing field: image_pdt');
+    if(!product.provider_pdt) throw Error('Missing field: provider_pdt');
+    if(!product.id_pdt) throw Error('Missing fields: id_pdt');
     const sql = `UPDATE products SET fit_pdt = ?, num_pdt = ?, skuPrenda_pdt = ?, nombre_pdt = ?, matKin_pdt = ?, talla_pdt = ?, 
         consumo_pdt = ?, tipTela_pdt = ?, costoMT_pdt = ?, costoTela_pdt = ?, costoEtiqueta_pdt = ?, costoBoton_pdt = ?, costoMaquila_pdt = ?, 
         costoAcabado_pdt = ?, costoBordSeri_pdt = ?, costoEmpaque_pdt = ?, costoTrans_pdt = ?, costoAdmin_pdt = ?, costoOtro_pdt = ?, 
@@ -65,15 +100,15 @@ const update = async(product) => {
 };
 
 const disable = async(id) => {
-    if (Number.isNaN(id)) throw Error('Wrong type');
-    if (!id) throw Error('Missing fields');
+    if (isNaN(id)) throw Error('Wrong type: Is not number');
+    if (!id) throw Error('Missing fields: id');
     const sql = `UPDATE products SET status_pdt = 0 WHERE id_pdt = ?;`;
     return await query(sql, [id]);
 };
 
 const enable = async(id) => {
-    if (Number.isNaN(id)) throw Error('Wrong type');
-    if (!id) throw Error('Missing fields');
+    if (isNaN(id)) throw Error('Wrong type: Is not number');
+    if (!id) throw Error('Missing fields: id');
     const sql = `UPDATE products SET status_pdt = 1 WHERE id_pdt = ?;`;
     return await query(sql, [id]);
 };

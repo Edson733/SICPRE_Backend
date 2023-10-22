@@ -12,10 +12,10 @@ POST http://localhost:8080/api-sicpre/users/save HTTP/1.1
 Content-Type: application/json
 
 {
-    "name_usr": "Tomas",
-    "lastname_usr": "Peralta",
+    "name_usr": "Gerson",
+    "lastname_usr": "Bahena",
     "role_usr": "Administrador",
-    "email_usr": "tomas@gmail.com",
+    "email_usr": "gerson@gmail.com",
     "password_usr": "123456"
 }
 
@@ -24,9 +24,9 @@ POST http://localhost:8080/api-sicpre/users/register HTTP/1.1
 Content-Type: application/json
 
 {
-    "name_usr": "Cecilia",
-    "lastname_usr": "Valdez",
-    "email_usr": "cecilia@gmail.com",
+    "name_usr": "Pedro",
+    "lastname_usr": "Val",
+    "email_usr": "pedro@gmail.com",
     "password_usr": "123456"
 }
 
@@ -35,16 +35,16 @@ PUT http://localhost:8080/api-sicpre/users/update HTTP/1.1
 Content-Type: application/json
 
 {
-    "usuarioId_usr": 2,
-    "name_usr": "Emilio",
-    "lastname_usr": "Peralta",
+    "usuarioId_usr": 4,
+    "name_usr": "Bahena",
+    "lastname_usr": "Gerson",
     "role_usr": "Administrador",
-    "email_usr": "emilio@gmail.com",
+    "email_usr": "bahena@gmail.com",
     "password_usr": "123456"
 }
 
 ### disable
-PUT http://localhost:8080/api-sicpre/users/disable/1 HTTP/1.1
+PUT http://localhost:8080/api-sicpre/users/disable/4 HTTP/1.1
 
 ### enable
-PUT http://localhost:8080/api-sicpre/users/enable/1 HTTP/1.1
+PUT http://localhost:8080/api-sicpre/users/enable/4 HTTP/1.1

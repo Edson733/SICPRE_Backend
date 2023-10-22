@@ -5,7 +5,7 @@ GET http://localhost:8080/api-sicpre/providers/all HTTP/1.1
 GET http://localhost:8080/api-sicpre/providers/all/enable HTTP/1.1
 
 ### findById
-GET http://localhost:8080/api-sicpre/providers/2 HTTP/1.1
+GET http://localhost:8080/api-sicpre/providers/3 HTTP/1.1
 
 ### save
 POST http://localhost:8080/api-sicpre/providers/save HTTP/1.1
@@ -25,17 +25,17 @@ PUT http://localhost:8080/api-sicpre/providers/update HTTP/1.1
 Content-Type: application/json
 
 {
-    "id_pvd": 2,
+    "id_pvd": 3,
     "rfc_pvd": "PID170429GJ1",
     "name_pvd": "Centro de Innovacion y Diseño(DIC)",
     "dirFis_pvd": "11 Sur 2104, Primer Piso, Colonia Centro, Puebla, EUA",
     "dirSuc_pvd": "11 Sur 2104, Primer Piso, Colonia Centro, Puebla, EUA",
-    "phone_pvd": "222 918 92 57",
+    "phone_pvd": "222 918 92",
     "email_pvd": "asistenciapuebla@cidpuebla.com"
 }
 
 ### disable
-PUT http://localhost:8080/api-sicpre/providers/disable/2 HTTP/1.1
+PUT http://localhost:8080/api-sicpre/providers/disable/3 HTTP/1.1
 
 ### enable
-PUT http://localhost:8080/api-sicpre/providers/enable/2 HTTP/1.1
+PUT http://localhost:8080/api-sicpre/providers/enable/3 HTTP/1.1
