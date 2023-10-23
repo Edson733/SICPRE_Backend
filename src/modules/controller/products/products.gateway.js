@@ -38,9 +38,9 @@ const save = async(product) => {
     if(!product.nombre_pdt) throw Error('Missing field: nombre_pdt');
     if(!product.matKin_pdt) throw Error('Missing field: matKin_pdt');
     if(!product.talla_pdt) throw Error('Missing field: talla_pdt');
-    if(!product.consumo_pdt) throw Error('Missing field: consumo_pdt');
+    //if(!product.consumo_pdt) throw Error('Missing field: consumo_pdt');
     if(!product.tipTela_pdt) throw Error('Missing field: tipTela_pdt');
-    if(!product.costoMT_pdt) throw Error('Missing field: costoMT_pdt');
+    /*if(!product.costoMT_pdt) throw Error('Missing field: costoMT_pdt');
     if(!product.costoTela_pdt) throw Error('Missing field: costoTela_pdt');
     if(!product.costoEtiqueta_pdt) throw Error('Missing field: costoEtiqueta_pdt');
     if(!product.costoBoton_pdt) throw Error('Missing field: costoBoton_pdt');
@@ -52,7 +52,7 @@ const save = async(product) => {
     if(!product.costoAdmin_pdt) throw Error('Missing field: costoAdmin_pdt');
     if(!product.costoOtro_pdt) throw Error('Missing field: costoOtro_pdt');
     if(!product.comisVenta_pdt) throw Error('Missing field: comisVenta_pdt');
-    if(!product.image_pdt) throw Error('Missing field: image_pdt');
+    if(!product.image_pdt) throw Error('Missing field: image_pdt');*/
     if(!product.provider_pdt) throw Error('Missing field: provider_pdt');
     const sql = `INSERT INTO products(fit_pdt, num_pdt, skuPrenda_pdt, nombre_pdt, matKin_pdt, talla_pdt, consumo_pdt, tipTela_pdt, costoMT_pdt, 
         costoTela_pdt, costoEtiqueta_pdt, costoBoton_pdt, costoMaquila_pdt, costoAcabado_pdt, costoBordSeri_pdt, costoEmpaque_pdt, costoTrans_pdt, 
@@ -72,9 +72,9 @@ const update = async(product) => {
     if(!product.nombre_pdt) throw Error('Missing field: nombre_pdt');
     if(!product.matKin_pdt) throw Error('Missing field: matKin_pdt');
     if(!product.talla_pdt) throw Error('Missing field: talla_pdt');
-    if(!product.consumo_pdt) throw Error('Missing field: consumo_pdt');
+    //if(!product.consumo_pdt) throw Error('Missing field: consumo_pdt');
     if(!product.tipTela_pdt) throw Error('Missing field: tipTela_pdt');
-    if(!product.costoMT_pdt) throw Error('Missing field: costoMT_pdt');
+    /*if(!product.costoMT_pdt) throw Error('Missing field: costoMT_pdt');
     if(!product.costoTela_pdt) throw Error('Missing field: costoTela_pdt');
     if(!product.costoEtiqueta_pdt) throw Error('Missing field: costoEtiqueta_pdt');
     if(!product.costoBoton_pdt) throw Error('Missing field: costoBoton_pdt');
@@ -86,7 +86,7 @@ const update = async(product) => {
     if(!product.costoAdmin_pdt) throw Error('Missing field: costoAdmin_pdt');
     if(!product.costoOtro_pdt) throw Error('Missing field: costoOtro_pdt');
     if(!product.comisVenta_pdt) throw Error('Missing field: comisVenta_pdt');
-    if(!product.image_pdt) throw Error('Missing field: image_pdt');
+    if(!product.image_pdt) throw Error('Missing field: image_pdt');*/
     if(!product.provider_pdt) throw Error('Missing field: provider_pdt');
     if(!product.id_pdt) throw Error('Missing fields: id_pdt');
     const sql = `UPDATE products SET fit_pdt = ?, num_pdt = ?, skuPrenda_pdt = ?, nombre_pdt = ?, matKin_pdt = ?, talla_pdt = ?, 
