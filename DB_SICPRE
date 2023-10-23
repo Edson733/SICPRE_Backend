@@ -80,27 +80,27 @@ create table products(
     nombre_pdt varchar(100) not null,
     matKin_pdt varchar(50) not null,
     talla_pdt varchar(50) not null,
-    consumo_pdt double not null,
+    consumo_pdt double null DEFAULT '0',
     tipTela_pdt varchar(100) not null,
-    costoMT_pdt double not null,
-    costoTela_pdt double not null,
-    costoEtiqueta_pdt double not null,
-    costoBoton_pdt double not null,
-    costoMaquila_pdt double not null,
-    costoAcabado_pdt double not null,
-    costoBordSeri_pdt double not null,
-    costoEmpaque_pdt double not null,
-    costoTrans_pdt double not null,
-    costoAdmin_pdt double not null,
-    costoOtro_pdt double not null,
-    comisVenta_pdt double not null,
+    costoMT_pdt double null DEFAULT '0',
+    costoTela_pdt double null DEFAULT '0',
+    costoEtiqueta_pdt double null DEFAULT '0',
+    costoBoton_pdt double null DEFAULT '0',
+    costoMaquila_pdt double null DEFAULT '0',
+    costoAcabado_pdt double null DEFAULT '0',
+    costoBordSeri_pdt double null DEFAULT '0',
+    costoEmpaque_pdt double null DEFAULT '0',
+    costoTrans_pdt double null DEFAULT '0',
+    costoAdmin_pdt double null DEFAULT '0',
+    costoOtro_pdt double null DEFAULT '0',
+    comisVenta_pdt double null DEFAULT '0',
     sumaTotal_pdt double as(costoTela_pdt + 
 		costoEtiqueta_pdt + costoBoton_pdt + 
 		costoMaquila_pdt + costoAcabado_pdt + 
         costoBordSeri_pdt + costoEmpaque_pdt + 
         costoTrans_pdt + costoAdmin_pdt + 
         costoOtro_pdt + comisVenta_pdt),
-	image_pdt mediumtext not null,
+	image_pdt mediumtext null,
 	status_pdt tinyint not null default 1,
     provider_pdt int not null,
     foreign key(provider_pdt) references providers(id_pvd)
@@ -125,10 +125,13 @@ INSERT INTO products(fit_pdt, num_pdt, skuPrenda_pdt, nombre_pdt, matKin_pdt, ta
 	costoBoton_pdt, costoMaquila_pdt, costoAcabado_pdt, costoBordSeri_pdt, costoEmpaque_pdt, costoTrans_pdt, costoAdmin_pdt, costoOtro_pdt, 
     comisVenta_pdt, image_pdt, provider_pdt) VALUES("NIÑA", 1, "n1", "Jumper (nuevo diseño y tela)", "MATERNAL Y KINDER", "S-M-L", 0.50, 
     "REF 160 - Variante 1 - AcrilPol", 79, 39.5, 2, 1, 35, 5, 15, 12, 8, 15, 10, 15, "Jumper", 1); -- Save
+INSERT INTO products(fit_pdt, num_pdt, skuPrenda_pdt, nombre_pdt, matKin_pdt, talla_pdt, tipTela_pdt, image_pdt, provider_pdt) 
+	VALUES("NIÑA", 1, "n1", "Jumper (nuevo diseño y tela)", "MATERNAL Y KINDER", "S-M-L",
+    "REF 160 - Variante 1 - AcrilPol", "Jumper", 1); -- Save
 UPDATE products SET fit_pdt = "NIÑA", num_pdt = 1, skuPrenda_pdt = "n1", nombre_pdt = "Jumper (nuevo diseño y tela)", matKin_pdt = "MATERNAL Y KINDER", 
-	talla_pdt = "S-M-L", consumo_pdt = 0.50, tipTela_pdt = "REF 160 - Variante 1 - AcrilPol", costoMT_pdt = 79, costoTela_pdt = 39.5, costoEtiqueta_pdt = 2, 
-    costoBoton_pdt = 1, costoMaquila_pdt = 35, costoAcabado_pdt = 5, costoBordSeri_pdt = 15, costoEmpaque_pdt = 12, costoTrans_pdt = 8, costoAdmin_pdt = 15, 
-    costoOtro_pdt = 10, comisVenta_pdt = 15, image_pdt = "Jumper1", status_pdt = 1, provider_pdt = 1 WHERE id_pdt = 1; -- Update
+	talla_pdt = "S-M-L", consumo_pdt = 0, tipTela_pdt = "REF 160 - Variante 1 - AcrilPol", costoMT_pdt = 79, costoTela_pdt = 39.5, costoEtiqueta_pdt = 2, 
+    costoBoton_pdt = 1, costoMaquila_pdt = 0, costoAcabado_pdt = 0, costoBordSeri_pdt = 15, costoEmpaque_pdt = 12, costoTrans_pdt = 8, costoAdmin_pdt = 15, 
+    costoOtro_pdt = 10, comisVenta_pdt = 15, image_pdt = "Jumper1", status_pdt = 1, provider_pdt = 1 WHERE id_pdt = 5; -- Update
 UPDATE products SET status_pdt = 1 WHERE id_pdt = 1; -- Habilitar
 UPDATE products SET status_pdt = 0 WHERE id_pdt = 1; -- Inhabilitar
 
