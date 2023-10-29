@@ -1,5 +1,7 @@
+//Importa el modulo para trabajar con el cifrado de contraseñas
 const bcrypt = require('bcryptjs');
 
+//Funcion que toma un error como entrada y devuelve un mensaje de error personalizado
 const validateError = (error) => {
     switch (error.message) {
         case "Wrong type":
@@ -38,15 +40,18 @@ const validateError = (error) => {
     }
 };
 
+//Funcion asincrona para cifrar una contraseña
 const hashPassword = async(password) => {
-    const salt = await bcrypt.genSalt(15);
-    return await bcrypt.hash(password, salt);
+    const salt = await bcrypt.genSalt(15); //Genera una variable aleatorio para el cifrado
+    return await bcrypt.hash(password, salt); //Aplica el cifrado a la contraseña utilizando la variable aleatoria
 };
 
+//Funcion asincrona para verificar si una contraseña coincide con su version cifrada
 const validatePassword = async(password, hashedPassword) => {
-    return await bcrypt.compare(password, hashedPassword);
+    return await bcrypt.compare(password, hashedPassword); //Compara la contraseña con su version cifrada y devuelve un valor booleano para indicar si coinciden
 };
 
+//Exporta las funciones para su uso en otros modulos
 module.exports = {
     validateError,
     hashPassword,

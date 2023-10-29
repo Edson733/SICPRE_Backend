@@ -1,7 +1,9 @@
+//Importa funciones que van a ser usadas en este modulo
 const {response, Router} = require('express');
 const {findAll, findEnable, findById, save, update, disable, enable} = require('./products.gateway');
 const {validateError} = require('../../../utils/functions');
 
+//Controlador para obtener todos los productos en la base de datos
 const getAll = async(req, res = response) => {
     try {
         const results = await findAll();
@@ -13,6 +15,7 @@ const getAll = async(req, res = response) => {
     }
 };
 
+//Controlador para obtener todos los productos habilitados en la base de datos
 const getEnable = async(req, res = response) => {
     try {
         const results = await findEnable();
@@ -24,6 +27,7 @@ const getEnable = async(req, res = response) => {
     }
 };
 
+//Controlador para obtener un producto por su ID
 const getById = async(req, res = response) => {
     try {
         const {id} = req.params;
@@ -36,6 +40,7 @@ const getById = async(req, res = response) => {
     }
 };
 
+//Controlador para insertar un nuevo producto en la base de datos
 const insert = async(req, res = response) => {
     try {
         const {fit_pdt, num_pdt, skuPrenda_pdt, nombre_pdt, matKin_pdt, talla_pdt, consumo_pdt, tipTela_pdt, costoMT_pdt, costoTela_pdt, 
@@ -52,6 +57,7 @@ const insert = async(req, res = response) => {
     }
 };
 
+//Controlador para modificar la informacion de un producto en la base de datos
 const modific = async(req, res = response) => {
     try {
         const {fit_pdt, num_pdt, skuPrenda_pdt, nombre_pdt, matKin_pdt, talla_pdt, consumo_pdt, tipTela_pdt, costoMT_pdt, costoTela_pdt, 
@@ -68,6 +74,7 @@ const modific = async(req, res = response) => {
     }
 };
 
+//Controlador para deshabilitar un producto en la base de datos
 const disa = async(req, res = response) => {
     try {
         const {id} = req.params;
@@ -80,6 +87,7 @@ const disa = async(req, res = response) => {
     }
 };
 
+//Controlador para habilitar un producto previamente deshabilitado en la base de datos
 const ena = async(req, res = response) => {
     try {
         const {id} = req.params;
@@ -92,15 +100,17 @@ const ena = async(req, res = response) => {
     }
 };
 
+//Define las rutas y los metodos HTTP correspondientes para cada controlador
 const productRouter = Router();
-productRouter.get(`/all`, [], getAll);
-productRouter.get(`/all/enable`, [], getEnable);
-productRouter.get(`/:id`, [], getById);
-productRouter.post(`/save`, [], insert);
-productRouter.put(`/update`, [], modific);
-productRouter.put(`/disable/:id`, [], disa);
-productRouter.put(`/enable/:id`, [], ena);
+productRouter.get(`/all`, [], getAll); //Ruta para obtener todos los productos
+productRouter.get(`/all/enable`, [], getEnable); //Ruta para obtener los productos habilitados
+productRouter.get(`/:id`, [], getById); //Ruta para obtener un producto por su ID
+productRouter.post(`/save`, [], insert); //Ruta para insertar un nuevo producto
+productRouter.put(`/update`, [], modific); //Ruta para actualizar un producto
+productRouter.put(`/disable/:id`, [], disa); //Ruta para deshabilitar un producto
+productRouter.put(`/enable/:id`, [], ena); //Ruta para habilitar un producto
 
+//Exporta el enrutador para su uso en otros modulos
 module.exports = {
     productRouter
 };

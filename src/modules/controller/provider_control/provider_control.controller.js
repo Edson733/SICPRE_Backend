@@ -1,7 +1,9 @@
+//Importa funciones que van a ser usadas en este modulo
 const {response, Router} = require('express');
 const {findAll, findEnable, findById, save, update, disable, enable} = require('./provider_control.gateway');
 const {validateError} = require('../../../utils/functions');
 
+//Controlador para obtener todos los controles de proveedores en la base de datos
 const getAll = async(req, res = response) => {
     try {
         const results = await findAll();
@@ -13,6 +15,7 @@ const getAll = async(req, res = response) => {
     }
 };
 
+//Controlador para obtener todos los controles de proveedores habilitados en la base de datos
 const getEnable = async(req, res = response) => {
     try {
         const results = await findEnable();
@@ -24,6 +27,7 @@ const getEnable = async(req, res = response) => {
     }
 };
 
+//Controlador para obtener un control de proveedor por su ID
 const getById = async(req, res = response) => {
     try {
         const {id} = req.params;
@@ -36,6 +40,7 @@ const getById = async(req, res = response) => {
     }
 };
 
+//Controlador para insertar un nuevo control de proveedor en la base de datos
 const insert = async(req, res = response) => {
     try {
         const {prinCont_pcl, numExt_pcl, sitWeb_pcl, startDate_pcl, evalDes_pcl, category_pcl, limCre_pcl, hisPag_pcl, datBan_pcl, 
@@ -50,6 +55,7 @@ const insert = async(req, res = response) => {
     }
 };
 
+//Controlador para modificar la informacion de un control de proveedor en la base de datos
 const modific = async(req, res = response) => {
     try {
         const {prinCont_pcl, numExt_pcl, sitWeb_pcl, startDate_pcl, evalDes_pcl, category_pcl, limCre_pcl, hisPag_pcl, datBan_pcl, 
@@ -64,6 +70,7 @@ const modific = async(req, res = response) => {
     }
 };
 
+//Controlador para deshabilitar un control de proveedor en la base de datos
 const disa = async(req, res = response) => {
     try {
         const {id} = req.params;
@@ -76,6 +83,7 @@ const disa = async(req, res = response) => {
     }
 };
 
+//Controlador para habilitar un control de proveedor previamente deshabilitado en la base de datos
 const ena = async(req, res = response) => {
     try {
         const {id} = req.params;
@@ -88,15 +96,17 @@ const ena = async(req, res = response) => {
     }
 };
 
+//Define las rutas y los metodos HTTP correspondientes para cada controlador
 const provider_controlRouter = Router();
-provider_controlRouter.get(`/all`, [], getAll);
-provider_controlRouter.get(`/all/enable`, [], getEnable);
-provider_controlRouter.get(`/:id`, [], getById);
-provider_controlRouter.post(`/save`, [], insert);
-provider_controlRouter.put(`/update`, [], modific);
-provider_controlRouter.put(`/disable/:id`, [], disa);
-provider_controlRouter.put(`/enable/:id`, [], ena);
+provider_controlRouter.get(`/all`, [], getAll); //Ruta para obtener todos los controles de proveedores
+provider_controlRouter.get(`/all/enable`, [], getEnable); //Ruta para obtener los controles de proveedores habilitados
+provider_controlRouter.get(`/:id`, [], getById); //Ruta para obtener un control de proveedor por su ID
+provider_controlRouter.post(`/save`, [], insert); //Ruta para insertar un nuevo control de proveedor
+provider_controlRouter.put(`/update`, [], modific); //Ruta para actualizar un control de proveedor
+provider_controlRouter.put(`/disable/:id`, [], disa); //Ruta para deshabilitar un control de proveedor
+provider_controlRouter.put(`/enable/:id`, [], ena); //Ruta para habilitar un control de proveedor
 
+//Exporta el enrutador para su uso en otros modulos
 module.exports = {
     provider_controlRouter
 };

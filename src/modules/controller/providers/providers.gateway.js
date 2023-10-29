@@ -1,15 +1,20 @@
+//Importa la funcion para interactuar con la base de datos
 const {query} = require('../../../utils/mysql');
 
+//Funcion para buscar todos los proveedores en la base de datos
 const findAll = async() => {
+    //Prepara una consulta SQL para seleccionar informacion de proveedores
     const sql = `SELECT * FROM providers;`;
-    return await query(sql, []);
+    return await query(sql, []); //Ejecuta la consulta y devuelve los resultados
 };
 
+//Funcion para buscar todos los proveedores habilitados en la base de datos
 const findEnable = async() => {
     const sql = `SELECT * FROM providers WHERE status_pvd = 1;`;
     return await query(sql, []);
 };
 
+//Funcion para buscar un proveedor por su ID
 const findById = async(id) => {
     if(isNaN(id)) throw Error('Wrong type: Is not number');
     if(!id) throw Error('Missing fields: id');
@@ -17,7 +22,9 @@ const findById = async(id) => {
     return await query(sql, [id]);
 };
 
+//Funcion para insertar un nuevo proveedor en la base de datos
 const save = async(provider) => {
+    //Valida que se proporcionen los campos necesarios del proveedor
     if(!provider.rfc_pvd) throw Error('Missing fields: rfc_pvd');
     if(!provider.name_pvd) throw Error('Missing fields: name_pvd');
     if(!provider.dirFis_pvd) throw Error('Missing fields: dirFis_pvd');
@@ -31,6 +38,7 @@ const save = async(provider) => {
     return {...provider, id: insertedId};
 };
 
+//Funcion para actualizar la informacion de un proveedor en la base de datos
 const update = async(provider) => {
     if(!provider.rfc_pvd) throw Error('Missing fields: rfc_pvd');
     if(!provider.name_pvd) throw Error('Missing fields: name_pvd');
@@ -45,6 +53,7 @@ const update = async(provider) => {
         provider.phone_pvd, provider.email_pvd, provider.id_pvd]);
 };
 
+//Funcion para deshabilitar un proveedor en la base de datos
 const disable = async(id) => {
     if (isNaN(id)) throw Error('Wrong type: Is not number');
     if (!id) throw Error('Missing fields: id');
@@ -52,6 +61,7 @@ const disable = async(id) => {
     return await query(sql, [id]);
 };
 
+//Funcion para habilitar un proveedor previamente deshabilitado en la base de datos
 const enable = async(id) => {
     if (isNaN(id)) throw Error('Wrong type: Is not number');
     if (!id) throw Error('Missing fields: id');
@@ -59,6 +69,7 @@ const enable = async(id) => {
     return await query(sql, [id]);
 };
 
+//Exporta las funciones para ser usadas en otros modulos
 module.exports = {
     findAll, 
     findEnable, 

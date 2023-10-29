@@ -1,15 +1,20 @@
+//Importa la funcion para interactuar con la base de datos
 const {query} = require('../../../utils/mysql');
 
+//Funcion para buscar todos los usuarios en la base de datos
 const findAll = async() => {
+    //Prepara una consulta SQL para seleccionar informacion de usuarios
     const sql = `SELECT * FROM users;`;
-    return await query(sql, []);
+    return await query(sql, []); //Ejecuta la consulta y devuelve los resultados
 };
 
+//Funcion para buscar todos los usuarios habilitados en la base de datos
 const findEnable = async() => {
     const sql = `SELECT * FROM users WHERE status_usr = 1;`;
     return await query(sql, []);
 };
 
+//Funcion para buscar un usuario por su ID
 const findById = async(id) => {
     if(isNaN(id)) throw Error('Wrong type: Is not number');
     if(!id) throw Error('Missing fields: id');
@@ -17,7 +22,9 @@ const findById = async(id) => {
     return await query(sql, [id]);
 };
 
+//Funcion para insertar un nuevo usuario en la base de datos
 const save = async(users) => {
+    //Valida que se proporcionen los campos necesarios del usuario
     if(!users.name_usr) throw Error("Missing fields: name_usr");
     if(!users.lastname_usr) throw Error("Missing fields: lastname_usr");
     if(!users.role_usr) throw Error("Missing fields: role_usr");
@@ -28,6 +35,7 @@ const save = async(users) => {
     return {...users, id: insertedId};
 };
 
+//Funcion para insertar un nuevo usuario con el rol de Cliente en la base de datos
 const saveUs = async(users) => {
     if(!users.name_usr) throw Error("Missing fields: name_usr");
     if(!users.lastname_usr) throw Error("Missing fields: lastname_usr");
@@ -38,6 +46,7 @@ const saveUs = async(users) => {
     return {...users, id: insertedId};
 }
 
+//Funcion para actualizar la informacion de un usuario en la base de datos
 const update = async(users) => {
     if(!users.name_usr) throw Error("Missing fields: name_usr");
     if(!users.lastname_usr) throw Error("Missing fields: lastname_usr");
@@ -50,6 +59,7 @@ const update = async(users) => {
     return await query(sql, [users.name_usr, users.lastname_usr, users.role_usr, users.email_usr, users.password_usr, users.usuarioId_usr]);
 };
 
+//Funcion para deshabilitar un usuario en la base de datos
 const disable = async(id) => {
     if(isNaN(id)) throw Error('Wrong type: Is not number');
     if(!id) throw Error('Missing fields: id');
@@ -57,6 +67,7 @@ const disable = async(id) => {
     return await query(sql, [id]);
 };
 
+//Funcion para habilitar un usuario previamente deshabilitado en la base de datos
 const enable = async(id) => {
     if(isNaN(id)) throw Error('Wrong type: Is not number');
     if(!id) throw Error('Missing fields: id');
@@ -64,6 +75,7 @@ const enable = async(id) => {
     return await query(sql, [id]);
 };
 
+//Exporta las funciones para ser usadas en otros modulos
 module.exports = {
     findAll,
     findById,

@@ -1,14 +1,18 @@
+//Importa la funcion para interactuar con la base de datos
 const {query} = require('../../../utils/mysql');
 
-const findAll = async() => { 
+//Funcion para buscar todos los productos en la base de datos
+const findAll = async() => {
+    //Prepara una consulta SQL para seleccionar informacion de productos y proveedores
     const sql = `SELECT products.id_pdt, products.fit_pdt, products.num_pdt, products.skuPrenda_pdt, products.nombre_pdt, products.matKin_pdt, 
         products.talla_pdt, products.consumo_pdt, products.tipTela_pdt, products.costoMT_pdt, products.costoTela_pdt, products.costoEtiqueta_pdt, 
         products.costoBoton_pdt, products.costoMaquila_pdt, products.costoAcabado_pdt, products.costoBordSeri_pdt, products.costoEmpaque_pdt, 
         products.costoTrans_pdt, products.costoAdmin_pdt, products.costoOtro_pdt, products.comisVenta_pdt, products.sumaTotal_pdt, 
         products.image_pdt, providers.name_pvd, products.status_pdt FROM products JOIN providers ON products.provider_pdt = providers.id_pvd;`;
-    return await query(sql, []);
+    return await query(sql, []); //Ejecuta la consulta y devuelve los resultados
 };
 
+//Funcion para buscar todos los productos habilitados en la base de datos
 const findEnable = async() => {
     const sql = `SELECT products.id_pdt, products.fit_pdt, products.num_pdt, products.skuPrenda_pdt, products.nombre_pdt, products.matKin_pdt, 
         products.talla_pdt, products.consumo_pdt, products.tipTela_pdt, products.costoMT_pdt, products.costoTela_pdt, products.costoEtiqueta_pdt, 
@@ -19,6 +23,7 @@ const findEnable = async() => {
     return await query(sql, []);
 };
 
+//Funcion para buscar un producto por su ID
 const findById = async(id) => {
     if (isNaN(id)) throw Error('Wrong type: Is not number');
     if (!id) throw Error('Missing fields: id');
@@ -31,7 +36,9 @@ const findById = async(id) => {
     return await query(sql, [id]);
 };
 
+//Funcion para insertar un nuevo producto en la base de datos
 const save = async(product) => {
+    //Valida que se proporcionen los campos necesarios del producto
     if(!product.fit_pdt) throw Error('Missing field: fit_pdt');
     if(!product.num_pdt) throw Error('Missing field: num_pdt');
     if(!product.skuPrenda_pdt) throw Error('Missing field: skuPrenda_pdt');
@@ -65,6 +72,7 @@ const save = async(product) => {
     return {...product, id: insertedId};
 };
 
+//Funcion para actualizar la informacion de un producto en la base de datos
 const update = async(product) => {
     if(!product.fit_pdt) throw Error('Missing field: fit_pdt');
     if(!product.num_pdt) throw Error('Missing field: num_pdt');
@@ -99,6 +107,7 @@ const update = async(product) => {
         product.costoAdmin_pdt, product.costoOtro_pdt, product.comisVenta_pdt, product.image_pdt, product.provider_pdt, product.id_pdt]);
 };
 
+//Funcion para deshabilitar un producto en la base de datos
 const disable = async(id) => {
     if (isNaN(id)) throw Error('Wrong type: Is not number');
     if (!id) throw Error('Missing fields: id');
@@ -106,6 +115,7 @@ const disable = async(id) => {
     return await query(sql, [id]);
 };
 
+//Funcion para habilitar un producto previamente deshabilitado en la base de datos
 const enable = async(id) => {
     if (isNaN(id)) throw Error('Wrong type: Is not number');
     if (!id) throw Error('Missing fields: id');
@@ -113,6 +123,7 @@ const enable = async(id) => {
     return await query(sql, [id]);
 };
 
+//Exporta las funciones para ser usadas en otros modulos
 module.exports = {
     findAll,
     findEnable,

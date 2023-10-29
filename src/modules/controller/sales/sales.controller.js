@@ -1,7 +1,9 @@
+//Importa funciones que van a ser usadas en este modulo
 const {response, Router} = require('express');
 const {findAll, findEnable, findById, save, update, disable, enable} = require('./sales.gateway');
 const {validateError} = require('../../../utils/functions');
 
+//Controlador para obtener todas las ventas en la base de datos
 const getAll = async(req, res = response) => {
     try {
         const results = await findAll();
@@ -13,6 +15,7 @@ const getAll = async(req, res = response) => {
     }
 };
 
+//Controlador para obtener todas las ventas habilitadas en la base de datos
 const getEnable = async(req, res = response) => {
     try {
         const results = await findEnable();
@@ -24,6 +27,7 @@ const getEnable = async(req, res = response) => {
     }
 };
 
+//Controlador para obtener una venta por su ID
 const getById = async(req, res = response) => {
     try {
         const {id} = req.params;
@@ -36,6 +40,7 @@ const getById = async(req, res = response) => {
     }
 };
 
+//Controlador para insertar una nueva venta en la base de datos
 const insert = async(req, res = response) => {
     try {
         const {product_sls, client_sls, totalCount_sls} = req.body;
@@ -48,6 +53,7 @@ const insert = async(req, res = response) => {
     }
 };
 
+//Controlador para modificar la informacion de una venta en la base de datos
 const modific = async(req, res = response) => {
     try {
         const {product_sls, client_sls, totalCount_sls, id_sls} = req.body;
@@ -60,6 +66,7 @@ const modific = async(req, res = response) => {
     }
 };
 
+//Controlador para deshabilitar una venta en la base de datos
 const disa = async(req, res = response) => {
     try {
         const {id} = req.params;
@@ -72,6 +79,7 @@ const disa = async(req, res = response) => {
     }
 };
 
+//Controlador para habilitar una venta previamente deshabilitada en la base de datos
 const ena = async(req, res = response) => {
     try {
         const {id} = req.params;
@@ -84,15 +92,17 @@ const ena = async(req, res = response) => {
     }
 };
 
+//Define las rutas y los metodos HTTP correspondientes para cada controlador
 const salesRouter = Router();
-salesRouter.get(`/all`, [], getAll);
-salesRouter.get(`/all/enable`, [], getEnable);
-salesRouter.get(`/:id`, [], getById);
-salesRouter.post(`/save`, [], insert);
-salesRouter.put(`/update`, [], modific);
-salesRouter.put(`/disable/:id`, [], disa);
-salesRouter.put(`/enable/:id`, [], ena);
+salesRouter.get(`/all`, [], getAll); //Ruta para obtener todas las ventas
+salesRouter.get(`/all/enable`, [], getEnable); //Ruta para obtener las ventas habilitadas
+salesRouter.get(`/:id`, [], getById); //Ruta para obtener una venta por su ID
+salesRouter.post(`/save`, [], insert); //Ruta para insertar una nueva venta
+salesRouter.put(`/update`, [], modific); //Ruta para actualizar una venta
+salesRouter.put(`/disable/:id`, [], disa); //Ruta para deshabilitar una venta
+salesRouter.put(`/enable/:id`, [], ena); //Ruta para habilitar una venta
 
+//Exporta el enrutador para su uso en otros modulos
 module.exports = {
     salesRouter
 };
